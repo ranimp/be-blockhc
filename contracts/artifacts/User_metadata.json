@@ -13,7 +13,7 @@
 						"type": "uint256"
 					}
 				],
-				"name": "accountsWithConsultations",
+				"name": "accountsWithProfile",
 				"outputs": [
 					{
 						"internalType": "address",
@@ -38,46 +38,177 @@
 					},
 					{
 						"internalType": "string",
-						"name": "_doctorName",
+						"name": "_gender",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
-						"name": "_session",
+						"name": "_email",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
-						"name": "_date",
+						"name": "_alamat",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
-						"name": "_symptom",
+						"name": "_birthdate",
+						"type": "string"
+					}
+				],
+				"name": "addUser",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "offset",
+						"type": "uint256"
+					}
+				],
+				"name": "getAllProfile",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "name",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "phone",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "gender",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "email",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "alamat",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "birthdate",
+								"type": "string"
+							},
+							{
+								"internalType": "address",
+								"name": "wallet",
+								"type": "address"
+							}
+						],
+						"internalType": "struct User.Data[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getProfile",
+				"outputs": [
+					{
+						"components": [
+							{
+								"internalType": "string",
+								"name": "name",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "phone",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "gender",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "email",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "alamat",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "birthdate",
+								"type": "string"
+							},
+							{
+								"internalType": "address",
+								"name": "wallet",
+								"type": "address"
+							}
+						],
+						"internalType": "struct User.Data[]",
+						"name": "",
+						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_index",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "_name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_phone",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
 						"name": "_gender",
 						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_email",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_alamat",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_birthdate",
+						"type": "string"
 					}
 				],
-				"name": "addConsultation",
+				"name": "updateProfile",
 				"outputs": [],
 				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "consultationCount",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -93,7 +224,7 @@
 						"type": "uint256"
 					}
 				],
-				"name": "consultations",
+				"name": "users",
 				"outputs": [
 					{
 						"internalType": "string",
@@ -107,27 +238,22 @@
 					},
 					{
 						"internalType": "string",
-						"name": "doctorName",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "session",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "date",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "symptom",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
 						"name": "gender",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "email",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "alamat",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "birthdate",
 						"type": "string"
 					},
 					{
@@ -137,223 +263,6 @@
 					}
 				],
 				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "offset",
-						"type": "uint256"
-					}
-				],
-				"name": "getAllConsultationsAdmin",
-				"outputs": [
-					{
-						"components": [
-							{
-								"internalType": "string",
-								"name": "name",
-								"type": "string"
-							},
-							{
-								"internalType": "string",
-								"name": "phone",
-								"type": "string"
-							},
-							{
-								"internalType": "string",
-								"name": "doctorName",
-								"type": "string"
-							},
-							{
-								"internalType": "string",
-								"name": "session",
-								"type": "string"
-							},
-							{
-								"internalType": "string",
-								"name": "date",
-								"type": "string"
-							},
-							{
-								"internalType": "string",
-								"name": "symptom",
-								"type": "string"
-							},
-							{
-								"internalType": "string",
-								"name": "gender",
-								"type": "string"
-							},
-							{
-								"internalType": "address",
-								"name": "wallet",
-								"type": "address"
-							}
-						],
-						"internalType": "struct Consultation.Data[]",
-						"name": "",
-						"type": "tuple[]"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "getConsultations",
-				"outputs": [
-					{
-						"components": [
-							{
-								"internalType": "string",
-								"name": "name",
-								"type": "string"
-							},
-							{
-								"internalType": "string",
-								"name": "phone",
-								"type": "string"
-							},
-							{
-								"internalType": "string",
-								"name": "doctorName",
-								"type": "string"
-							},
-							{
-								"internalType": "string",
-								"name": "session",
-								"type": "string"
-							},
-							{
-								"internalType": "string",
-								"name": "date",
-								"type": "string"
-							},
-							{
-								"internalType": "string",
-								"name": "symptom",
-								"type": "string"
-							},
-							{
-								"internalType": "string",
-								"name": "gender",
-								"type": "string"
-							},
-							{
-								"internalType": "address",
-								"name": "wallet",
-								"type": "address"
-							}
-						],
-						"internalType": "struct Consultation.Data[]",
-						"name": "",
-						"type": "tuple[]"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "_index",
-						"type": "uint256"
-					},
-					{
-						"internalType": "string",
-						"name": "_name",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "_phone",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "_doctorName",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "_session",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "_date",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "_symptom",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "_gender",
-						"type": "string"
-					}
-				],
-				"name": "updateConsultation",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "_wallet",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "_index",
-						"type": "uint256"
-					},
-					{
-						"internalType": "string",
-						"name": "_name",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "_phone",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "_doctorName",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "_session",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "_date",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "_symptom",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "_gender",
-						"type": "string"
-					}
-				],
-				"name": "updateConsultationAdmin",
-				"outputs": [],
-				"stateMutability": "nonpayable",
 				"type": "function"
 			}
 		],
@@ -370,7 +279,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/konsultasi.sol": "Consultation"
+			"contracts/user.sol": "User"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -384,12 +293,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/konsultasi.sol": {
-			"keccak256": "0x732c54b4254b5a7fc6b9ff4fbbd91603a915981e3fac45d3deaaefb255a38397",
+		"contracts/user.sol": {
+			"keccak256": "0x70ad084e756ac37436bac6b05d91268da3d01651d6be92e38d87b4d663e166af",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://665701d707352fb1993e7c1dd370b22e8933698161125b864f1442f46a756ade",
-				"dweb:/ipfs/QmUeSyZPCxBF42jk8JQGBFBiEHhGTNm6MtzWmEcEVP3ZdS"
+				"bzz-raw://3d2e686a2f1b92ccdfbd53bcd8d7646091793971d1c6b9b47f8d7e07f531ad8a",
+				"dweb:/ipfs/QmRitNozidpnB1zoqWSXeVDyY6kpRdbnD1wVhYGXuw1QQ8"
 			]
 		}
 	},
