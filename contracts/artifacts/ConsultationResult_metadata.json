@@ -6,6 +6,11 @@
 	"output": {
 		"abi": [
 			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "uint256",
@@ -27,38 +32,43 @@
 			{
 				"inputs": [
 					{
+						"internalType": "address",
+						"name": "_wallet",
+						"type": "address"
+					},
+					{
 						"internalType": "string",
-						"name": "_name",
+						"name": "_nama",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
-						"name": "_phone",
+						"name": "_namaDokter",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
-						"name": "_doctorName",
+						"name": "_tanggal",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
-						"name": "_session",
+						"name": "_keluhan",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
-						"name": "_date",
+						"name": "_diagnosa",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
-						"name": "_symptom",
+						"name": "_tensi",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
-						"name": "_gender",
+						"name": "_gula",
 						"type": "string"
 					}
 				],
@@ -97,37 +107,37 @@
 				"outputs": [
 					{
 						"internalType": "string",
-						"name": "name",
+						"name": "nama",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
-						"name": "phone",
+						"name": "namaDokter",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
-						"name": "doctorName",
+						"name": "tanggal",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
-						"name": "session",
+						"name": "keluhan",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
-						"name": "date",
+						"name": "diagnosa",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
-						"name": "symptom",
+						"name": "tensi",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
-						"name": "gender",
+						"name": "gula",
 						"type": "string"
 					},
 					{
@@ -153,37 +163,37 @@
 						"components": [
 							{
 								"internalType": "string",
-								"name": "name",
+								"name": "nama",
 								"type": "string"
 							},
 							{
 								"internalType": "string",
-								"name": "phone",
+								"name": "namaDokter",
 								"type": "string"
 							},
 							{
 								"internalType": "string",
-								"name": "doctorName",
+								"name": "tanggal",
 								"type": "string"
 							},
 							{
 								"internalType": "string",
-								"name": "session",
+								"name": "keluhan",
 								"type": "string"
 							},
 							{
 								"internalType": "string",
-								"name": "date",
+								"name": "diagnosa",
 								"type": "string"
 							},
 							{
 								"internalType": "string",
-								"name": "symptom",
+								"name": "tensi",
 								"type": "string"
 							},
 							{
 								"internalType": "string",
-								"name": "gender",
+								"name": "gula",
 								"type": "string"
 							},
 							{
@@ -192,7 +202,7 @@
 								"type": "address"
 							}
 						],
-						"internalType": "struct Consultation.Data[]",
+						"internalType": "struct ConsultationResult.Data[]",
 						"name": "",
 						"type": "tuple[]"
 					}
@@ -208,37 +218,37 @@
 						"components": [
 							{
 								"internalType": "string",
-								"name": "name",
+								"name": "nama",
 								"type": "string"
 							},
 							{
 								"internalType": "string",
-								"name": "phone",
+								"name": "namaDokter",
 								"type": "string"
 							},
 							{
 								"internalType": "string",
-								"name": "doctorName",
+								"name": "tanggal",
 								"type": "string"
 							},
 							{
 								"internalType": "string",
-								"name": "session",
+								"name": "keluhan",
 								"type": "string"
 							},
 							{
 								"internalType": "string",
-								"name": "date",
+								"name": "diagnosa",
 								"type": "string"
 							},
 							{
 								"internalType": "string",
-								"name": "symptom",
+								"name": "tensi",
 								"type": "string"
 							},
 							{
 								"internalType": "string",
-								"name": "gender",
+								"name": "gula",
 								"type": "string"
 							},
 							{
@@ -247,9 +257,28 @@
 								"type": "address"
 							}
 						],
-						"internalType": "struct Consultation.Data[]",
+						"internalType": "struct ConsultationResult.Data[]",
 						"name": "",
 						"type": "tuple[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "roles",
+				"outputs": [
+					{
+						"internalType": "enum ConsultationResult.Role",
+						"name": "",
+						"type": "uint8"
 					}
 				],
 				"stateMutability": "view",
@@ -269,89 +298,41 @@
 					},
 					{
 						"internalType": "string",
-						"name": "_name",
+						"name": "_nama",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
-						"name": "_phone",
+						"name": "_namaDokter",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
-						"name": "_doctorName",
+						"name": "_tanggal",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
-						"name": "_session",
+						"name": "_keluhan",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
-						"name": "_date",
+						"name": "_diagnosa",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
-						"name": "_symptom",
+						"name": "_tensi",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
-						"name": "_gender",
+						"name": "_gula",
 						"type": "string"
 					}
 				],
 				"name": "updateConsultation",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "_index",
-						"type": "uint256"
-					},
-					{
-						"internalType": "string",
-						"name": "_name",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "_phone",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "_doctorName",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "_session",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "_date",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "_symptom",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "_gender",
-						"type": "string"
-					}
-				],
-				"name": "updateConsultationPasien",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -370,7 +351,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/konsultasi.sol": "Consultation"
+			"contracts/konsultasi.sol": "ConsultationResult"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -385,11 +366,11 @@
 	},
 	"sources": {
 		"contracts/konsultasi.sol": {
-			"keccak256": "0x4ddd59c2db6f6e072707a6d821094372c005e1ca6f9b96c1e601ad2f0cd8a275",
+			"keccak256": "0xfd61d4feb9ae3872aa53449d34ee3d42c355f35de6d3713e1171642ffa754dd9",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e08e0256c5287200dabf759177ecbeb375d87db65638236487369fc7ed600888",
-				"dweb:/ipfs/QmTkTYR22yeJhXP1AhaSJZF3YHERyEBqWYwELqvEPhr4HM"
+				"bzz-raw://0fc04bcb1c037b7a071065afb46b6aa86e9858b6581a2528ed3f7d3eb8aebd05",
+				"dweb:/ipfs/Qmavs2izpDP3HBzFS2DEXdRr5wsiP64JhkXYg4qxRKJGxY"
 			]
 		}
 	},

@@ -11,7 +11,7 @@
 					{
 						"indexed": false,
 						"internalType": "string",
-						"name": "name",
+						"name": "nama",
 						"type": "string"
 					},
 					{
@@ -22,9 +22,9 @@
 					},
 					{
 						"indexed": false,
-						"internalType": "uint256",
-						"name": "phone",
-						"type": "uint256"
+						"internalType": "string",
+						"name": "telepon",
+						"type": "string"
 					},
 					{
 						"indexed": false,
@@ -35,13 +35,7 @@
 					{
 						"indexed": false,
 						"internalType": "string",
-						"name": "alamat",
-						"type": "string"
-					},
-					{
-						"indexed": false,
-						"internalType": "string",
-						"name": "birthdate",
+						"name": "tanggalLahir",
 						"type": "string"
 					},
 					{
@@ -49,6 +43,18 @@
 						"internalType": "address",
 						"name": "wallet",
 						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "bool",
+						"name": "status",
+						"type": "bool"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "role",
+						"type": "string"
 					}
 				],
 				"name": "UserAdded",
@@ -57,8 +63,13 @@
 			{
 				"inputs": [
 					{
+						"internalType": "address",
+						"name": "_wallet",
+						"type": "address"
+					},
+					{
 						"internalType": "string",
-						"name": "_name",
+						"name": "_nama",
 						"type": "string"
 					},
 					{
@@ -67,9 +78,9 @@
 						"type": "string"
 					},
 					{
-						"internalType": "uint256",
-						"name": "_phone",
-						"type": "uint256"
+						"internalType": "string",
+						"name": "_telepon",
+						"type": "string"
 					},
 					{
 						"internalType": "string",
@@ -78,18 +89,74 @@
 					},
 					{
 						"internalType": "string",
-						"name": "_alamat",
+						"name": "_tanggalLahir",
 						"type": "string"
 					},
 					{
+						"internalType": "bool",
+						"name": "_status",
+						"type": "bool"
+					},
+					{
 						"internalType": "string",
-						"name": "_birthdate",
+						"name": "_role",
 						"type": "string"
 					}
 				],
 				"name": "addUser",
 				"outputs": [],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_nama",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_email",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_telepon",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_gender",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_tanggalLahir",
+						"type": "string"
+					},
+					{
+						"internalType": "bool",
+						"name": "_status",
+						"type": "bool"
+					}
+				],
+				"name": "addUserPasien",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "defaultRole",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -100,7 +167,7 @@
 						"components": [
 							{
 								"internalType": "string",
-								"name": "name",
+								"name": "nama",
 								"type": "string"
 							},
 							{
@@ -109,9 +176,9 @@
 								"type": "string"
 							},
 							{
-								"internalType": "uint256",
-								"name": "phone",
-								"type": "uint256"
+								"internalType": "string",
+								"name": "telepon",
+								"type": "string"
 							},
 							{
 								"internalType": "string",
@@ -120,18 +187,23 @@
 							},
 							{
 								"internalType": "string",
-								"name": "alamat",
-								"type": "string"
-							},
-							{
-								"internalType": "string",
-								"name": "birthdate",
+								"name": "tanggalLahir",
 								"type": "string"
 							},
 							{
 								"internalType": "address",
 								"name": "wallet",
 								"type": "address"
+							},
+							{
+								"internalType": "bool",
+								"name": "status",
+								"type": "bool"
+							},
+							{
+								"internalType": "string",
+								"name": "role",
+								"type": "string"
 							}
 						],
 						"internalType": "struct UserData.User[]",
@@ -163,11 +235,6 @@
 						"type": "string"
 					},
 					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					},
-					{
 						"internalType": "string",
 						"name": "",
 						"type": "string"
@@ -176,6 +243,16 @@
 						"internalType": "string",
 						"name": "",
 						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					},
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
 					},
 					{
 						"internalType": "string",
@@ -195,7 +272,7 @@
 					},
 					{
 						"internalType": "string",
-						"name": "_name",
+						"name": "_nama",
 						"type": "string"
 					},
 					{
@@ -204,9 +281,9 @@
 						"type": "string"
 					},
 					{
-						"internalType": "uint256",
-						"name": "_phone",
-						"type": "uint256"
+						"internalType": "string",
+						"name": "_telepon",
+						"type": "string"
 					},
 					{
 						"internalType": "string",
@@ -215,16 +292,59 @@
 					},
 					{
 						"internalType": "string",
-						"name": "_alamat",
+						"name": "_tanggalLahir",
+						"type": "string"
+					},
+					{
+						"internalType": "bool",
+						"name": "_status",
+						"type": "bool"
+					},
+					{
+						"internalType": "string",
+						"name": "_role",
+						"type": "string"
+					}
+				],
+				"name": "updateUser",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_nama",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
-						"name": "_birthdate",
+						"name": "_email",
 						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_telepon",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_gender",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_tanggalLahir",
+						"type": "string"
+					},
+					{
+						"internalType": "bool",
+						"name": "_status",
+						"type": "bool"
 					}
 				],
-				"name": "updateUserByWallet",
+				"name": "updateUserPasien",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -241,7 +361,7 @@
 				"outputs": [
 					{
 						"internalType": "string",
-						"name": "name",
+						"name": "nama",
 						"type": "string"
 					},
 					{
@@ -250,9 +370,9 @@
 						"type": "string"
 					},
 					{
-						"internalType": "uint256",
-						"name": "phone",
-						"type": "uint256"
+						"internalType": "string",
+						"name": "telepon",
+						"type": "string"
 					},
 					{
 						"internalType": "string",
@@ -261,18 +381,23 @@
 					},
 					{
 						"internalType": "string",
-						"name": "alamat",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "birthdate",
+						"name": "tanggalLahir",
 						"type": "string"
 					},
 					{
 						"internalType": "address",
 						"name": "wallet",
 						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "status",
+						"type": "bool"
+					},
+					{
+						"internalType": "string",
+						"name": "role",
+						"type": "string"
 					}
 				],
 				"stateMutability": "view",
@@ -307,11 +432,11 @@
 	},
 	"sources": {
 		"contracts/user.sol": {
-			"keccak256": "0x6b02685b834e0f867b2f6b2218e0fdedb636d7e62758ccf835015861902f7a54",
+			"keccak256": "0xb905d788947ec87dcaf48c8cd1cf9982b78210f2a6e4aa6c001e11fff15122d6",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://31e641f79d34774d2887edeb627e0a2ab0080f792dbf4e0abf68cc1ea4aca0d5",
-				"dweb:/ipfs/QmTp9S2b8Piw6FShheEdWZptuEA2yoz1JykpuzFnc9xEZ7"
+				"bzz-raw://1344bf531503b9b5da57c857e286cf396eb95b10dffc55f45853cd1e23b80086",
+				"dweb:/ipfs/QmckAYJnpAFL6ZGaf1AJXu9owk4TwHuAxEPhRpoC1zC33z"
 			]
 		}
 	},

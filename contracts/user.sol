@@ -3,57 +3,175 @@ pragma solidity ^0.8.7;
 
 contract UserData {
     struct User {
-        string name;
+        string nama;
         string email;
-        uint phone;
+        string telepon;
         string gender;
-        string alamat;
-        string birthdate;
+        string tanggalLahir;
         address wallet;
+        bool status;
+        string role;
     }
 
     event UserAdded(
-        string name,
+        string nama,
         string email,
-        uint phone,
+        string telepon,
         string gender,
-        string alamat,
-        string birthdate,
-        address wallet
+        string tanggalLahir,
+        address wallet,
+        bool status,
+        string role
     );
 
     User[] public users;
+    string public defaultRole = "Pasien";
 
-    function addUser(string memory _name, string memory _email, uint _phone, string memory _gender, string memory _alamat, string memory _birthdate) public {
-        User memory newUser = User(_name, _email, _phone, _gender, _alamat, _birthdate, msg.sender);
+    // add user for pasien
+    function addUserPasien(
+        string memory _nama,
+        string memory _email,
+        string memory _telepon,
+        string memory _gender,
+        string memory _tanggalLahir,
+        bool _status
+    ) public {
+        User memory newUser = User(
+            _nama,
+            _email,
+            _telepon,
+            _gender,
+            _tanggalLahir,
+            msg.sender,
+            _status,
+            defaultRole
+        );
         users.push(newUser);
-        emit UserAdded(_name, _email, _phone, _gender, _alamat, _birthdate, msg.sender);
+        emit UserAdded(
+            _nama,
+            _email,
+            _telepon,
+            _gender,
+            _tanggalLahir,
+            msg.sender,
+            _status,
+            defaultRole
+        );
     }
 
-    function getUserByWallet(address _wallet) public view returns (string memory, string memory, uint, string memory, string memory, string memory) {
-        for (uint i = 0; i < users.length; i++) {
+    // add user for admin
+    function addUser(
+        address _wallet,
+        string memory _nama,
+        string memory _email,
+        string memory _telepon,
+        string memory _gender,
+        string memory _tanggalLahir,
+        bool _status,
+        string memory _role
+    ) public {
+        User memory newUser = User(
+            _nama,
+            _email,
+            _telepon,
+            _gender,
+            _tanggalLahir,
+            _wallet,
+            _status,
+            _role
+        );
+        users.push(newUser);
+        emit UserAdded(
+            _nama,
+            _email,
+            _telepon,
+            _gender,
+            _tanggalLahir,
+            _wallet,
+            _status,
+            _role
+        );
+    }
+
+    // update for admin
+    function updateUser(
+        address _wallet,
+        string memory _nama,
+        string memory _email,
+        string memory _telepon,
+        string memory _gender,
+        string memory _tanggalLahir,
+        bool _status,
+        string memory _role
+    ) public {
+        for (uint256 i = 0; i < users.length; i++) {
             if (users[i].wallet == _wallet) {
-                return (users[i].name, users[i].email, users[i].phone, users[i].gender, users[i].alamat, users[i].birthdate);
-            }
-        }
-        return ("", "", 0, "", "", "");
-    }
-
-    function getAllUsers() public view returns (User[] memory) {
-        return users;
-    }
-
-    function updateUserByWallet(address _wallet, string memory _name, string memory _email, uint _phone, string memory _gender, string memory _alamat, string memory _birthdate) public {
-        for (uint i = 0; i < users.length; i++) {
-            if (users[i].wallet == _wallet) {
-                users[i].name = _name;
+                users[i].nama = _nama;
                 users[i].email = _email;
-                users[i].phone = _phone;
+                users[i].telepon = _telepon;
                 users[i].gender = _gender;
-                users[i].alamat = _alamat;
-                users[i].birthdate = _birthdate;
+                users[i].tanggalLahir = _tanggalLahir;
+                users[i].status = _status;
+                users[i].role = _role;
                 break;
             }
         }
+    }
+
+    // update for pasien
+    function updateUserPasien(
+        string memory _nama,
+        string memory _email,
+        string memory _telepon,
+        string memory _gender,
+        string memory _tanggalLahir,
+        bool _status
+    ) public {
+        for (uint256 i = 0; i < users.length; i++) {
+            if (users[i].wallet == msg.sender) {
+                users[i].nama = _nama;
+                users[i].email = _email;
+                users[i].telepon = _telepon;
+                users[i].gender = _gender;
+                users[i].tanggalLahir = _tanggalLahir;
+                users[i].status = _status;
+                break;
+            }
+        }
+    }
+
+    // get for user
+    function getUserByWallet(address _wallet)
+        public
+        view
+        returns (
+            string memory,
+            string memory,
+            string memory,
+            string memory,
+            string memory,
+            bool,
+            string memory
+        )
+    {
+        for (uint256 i = 0; i < users.length; i++) {
+            if (users[i].wallet == _wallet) {
+                return (
+                    users[i].nama,
+                    users[i].email,
+                    users[i].telepon,
+                    users[i].gender,
+                    users[i].tanggalLahir,
+                    users[i].status,
+                    users[i].role
+                );
+            }
+        }
+        return ("", "", "", "", "", true, "");
+    }
+
+    // get for admin
+    function getAllUsers() public view returns (User[] memory) {
+        return users;
     }
 }

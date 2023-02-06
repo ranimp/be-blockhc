@@ -1,44 +1,76 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
 
-contract Consultation {
+contract ConsultationResult {
+    enum Role {Pasien, Dokter, Admin}
+
     struct Data {
-        string name;
-        string phone;
-        string doctorName;
-        string session;
-        string date;
-        string symptom;
-        string gender;
+        string nama;
+        string namaDokter;
+        string tanggal;
+        string keluhan;
+        string diagnosa;
+        string tensi;
+        string gula;
         address wallet;
     }
 
     mapping(address => Data[]) public consultations;
     address[] public accountsWithConsultations;
     uint public consultationCount;
+    mapping(address => Role) public roles;
 
-    function addConsultation(string memory _name, string memory _phone, string memory _doctorName, string memory _session, string memory _date, string memory _symptom, string memory _gender) public {
-        consultations[msg.sender].push(Data(_name, _phone, _doctorName, _session, _date, _symptom, _gender, msg.sender));
-        accountsWithConsultations.push(msg.sender);
+    constructor() {
+        roles[msg.sender] = Role.Admin;
+    }
+
+    modifier onlyAdmin {
+        require(roles[msg.sender] == Role.Admin, "Hanya admin yang diizinkan untuk melakukan tindakan ini");
+    _;
+    }
+
+    modifier onlyAdminOrDokter {
+        require(roles[msg.sender] == Role.Admin || roles[msg.sender] == Role.Dokter, "Hanya admin dan dokter yang diizinkan untuk melakukan tindakan ini");
+    _;
+    }
+
+    // tambah konsultasi untuk admin & dokter
+    function addConsultation(
+        address _wallet, 
+        string memory _nama, 
+        string memory _namaDokter, 
+        string memory _tanggal, 
+        string memory _keluhan, 
+        string memory _diagnosa, 
+        string memory _tensi, 
+        string memory _gula) public onlyAdminOrDokter {
+        consultations[_wallet].push(Data(_nama, _namaDokter, _tanggal, _keluhan, _diagnosa, _tensi, _gula, _wallet));
+        accountsWithConsultations.push(_wallet);
         consultationCount++;
     }
 
-    function getConsultations() public view returns (Data[] memory) {
+    // update konsultasi untuk admin & dokter
+    function updateConsultation(
+        address _wallet, 
+        uint _index, 
+        string memory _nama, 
+        string memory _namaDokter, 
+        string memory _tanggal, 
+        string memory _keluhan, 
+        string memory _diagnosa, 
+        string memory _tensi, 
+        string memory _gula) public onlyAdminOrDokter {
+        require(_index < consultationCount, "Consultation data not found");
+        consultations[_wallet][_index] = Data(_nama, _namaDokter, _tanggal, _keluhan, _diagnosa, _tensi, _gula, _wallet);
+    }
+
+    // get konsultasi untuk pasien
+    function getConsultationsPasien() public view returns (Data[] memory) {
         return consultations[msg.sender];
     }
 
-    function updateConsultation(uint _index, string memory _name, string memory _phone, string memory _doctorName, string memory _session, string memory _date, string memory _symptom, string memory _gender) public {
-        require(_index < consultationCount, "Consultation data not found");
-        require(msg.sender == consultations[msg.sender][_index].wallet, "You are not the owner of the consultation data");
-        consultations[msg.sender][_index] = Data(_name, _phone, _doctorName, _session, _date, _symptom, _gender, msg.sender);
-    }
-
-    function updateConsultationAdmin(address _wallet, uint _index, string memory _name, string memory _phone, string memory _doctorName, string memory _session, string memory _date, string memory _symptom, string memory _gender) public {
-        require(_index < consultationCount, "Consultation data not found");
-        consultations[_wallet][_index] = Data(_name, _phone, _doctorName, _session, _date, _symptom, _gender, _wallet);
-    }
-
-    function getAllConsultationsAdmin(uint offset) public view returns (Data[] memory) {
+    // get semua data konsultasi untuk admin
+    function getAllConsultations(uint offset) public view onlyAdmin returns (Data[] memory) {
         uint maxConsultationsPerAccount = 10;
         Data[] memory allConsultations = new Data[](10 * maxConsultationsPerAccount);
         uint counter = 0;
