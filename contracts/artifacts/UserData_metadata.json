@@ -1,10 +1,15 @@
 {
 	"compiler": {
-		"version": "0.8.7+commit.e28d00a7"
+		"version": "0.8.17+commit.8df45f5f"
 	},
 	"language": "Solidity",
 	"output": {
 		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
 			{
 				"anonymous": false,
 				"inputs": [
@@ -52,13 +57,51 @@
 					},
 					{
 						"indexed": false,
-						"internalType": "string",
+						"internalType": "uint8",
 						"name": "role",
-						"type": "string"
+						"type": "uint8"
 					}
 				],
 				"name": "UserAdded",
 				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_nama",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_email",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_telepon",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_gender",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_tanggalLahir",
+						"type": "string"
+					},
+					{
+						"internalType": "bool",
+						"name": "_status",
+						"type": "bool"
+					}
+				],
+				"name": "addUser",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
 			},
 			{
 				"inputs": [
@@ -98,62 +141,24 @@
 						"type": "bool"
 					},
 					{
-						"internalType": "string",
+						"internalType": "uint8",
 						"name": "_role",
-						"type": "string"
+						"type": "uint8"
 					}
 				],
-				"name": "addUser",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "string",
-						"name": "_nama",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "_email",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "_telepon",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "_gender",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "_tanggalLahir",
-						"type": "string"
-					},
-					{
-						"internalType": "bool",
-						"name": "_status",
-						"type": "bool"
-					}
-				],
-				"name": "addUserPasien",
+				"name": "addUserAdmin",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
 				"inputs": [],
-				"name": "defaultRole",
+				"name": "admin",
 				"outputs": [
 					{
-						"internalType": "string",
+						"internalType": "address",
 						"name": "",
-						"type": "string"
+						"type": "address"
 					}
 				],
 				"stateMutability": "view",
@@ -161,7 +166,69 @@
 			},
 			{
 				"inputs": [],
-				"name": "getAllUsers",
+				"name": "defaultRole",
+				"outputs": [
+					{
+						"internalType": "uint8",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_wallet",
+						"type": "address"
+					}
+				],
+				"name": "getUser",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					},
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint8",
+						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "getUserAdmin",
 				"outputs": [
 					{
 						"components": [
@@ -201,9 +268,9 @@
 								"type": "bool"
 							},
 							{
-								"internalType": "string",
+								"internalType": "uint8",
 								"name": "role",
-								"type": "string"
+								"type": "uint8"
 							}
 						],
 						"internalType": "struct UserData.User[]",
@@ -218,49 +285,57 @@
 				"inputs": [
 					{
 						"internalType": "address",
-						"name": "_wallet",
+						"name": "",
 						"type": "address"
 					}
 				],
-				"name": "getUserByWallet",
+				"name": "roles",
 				"outputs": [
 					{
-						"internalType": "string",
+						"internalType": "uint8",
 						"name": "",
+						"type": "uint8"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_nama",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
-						"name": "",
+						"name": "_email",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
-						"name": "",
+						"name": "_telepon",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
-						"name": "",
+						"name": "_gender",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
-						"name": "",
+						"name": "_tanggalLahir",
 						"type": "string"
 					},
 					{
 						"internalType": "bool",
-						"name": "",
+						"name": "_status",
 						"type": "bool"
-					},
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
 					}
 				],
-				"stateMutability": "view",
+				"name": "updateUser",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -301,50 +376,12 @@
 						"type": "bool"
 					},
 					{
-						"internalType": "string",
+						"internalType": "uint8",
 						"name": "_role",
-						"type": "string"
+						"type": "uint8"
 					}
 				],
-				"name": "updateUser",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "string",
-						"name": "_nama",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "_email",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "_telepon",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "_gender",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "_tanggalLahir",
-						"type": "string"
-					},
-					{
-						"internalType": "bool",
-						"name": "_status",
-						"type": "bool"
-					}
-				],
-				"name": "updateUserPasien",
+				"name": "updateUserAdmin",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -395,9 +432,9 @@
 						"type": "bool"
 					},
 					{
-						"internalType": "string",
+						"internalType": "uint8",
 						"name": "role",
-						"type": "string"
+						"type": "uint8"
 					}
 				],
 				"stateMutability": "view",
@@ -432,11 +469,11 @@
 	},
 	"sources": {
 		"contracts/user.sol": {
-			"keccak256": "0xb905d788947ec87dcaf48c8cd1cf9982b78210f2a6e4aa6c001e11fff15122d6",
+			"keccak256": "0x0b36b2f20dc427a0daa94adc14c8ee34aadfe82ef3e84e6e7c079abfb8efb748",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://1344bf531503b9b5da57c857e286cf396eb95b10dffc55f45853cd1e23b80086",
-				"dweb:/ipfs/QmckAYJnpAFL6ZGaf1AJXu9owk4TwHuAxEPhRpoC1zC33z"
+				"bzz-raw://a47f0b5c1fae4ee218213a5d2c38d6e0f2591dcdb55ecad40d578dcb4823ad7b",
+				"dweb:/ipfs/QmTzkU7vD53GkdQtLPECyhcVMXxyk9PE6XEUhAchKn8VCG"
 			]
 		}
 	},
