@@ -1,12 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
 
-import "./roles.sol";
-
 contract UserData {
-    UserRoles public roles;
-    User[] public users;
-
+    address public admin;
     struct User {
         string nama;
         string email;
@@ -15,6 +11,7 @@ contract UserData {
         string tanggalLahir;
         address wallet;
         bool status;
+        uint8 role;
     }
 
     event UserAdded(
@@ -24,18 +21,23 @@ contract UserData {
         string gender,
         string tanggalLahir,
         address wallet,
-        bool status
+        bool status,
+        uint8 role
     );
 
-    constructor(address _rolesContractAddress) {
-        roles = UserRoles(_rolesContractAddress);
+    User[] public users;
+    mapping(address => uint8) public roles;
+    uint8 public defaultRole = 1;
+
+    constructor() {
+        admin = msg.sender;
+        roles[admin] = 0;
     }
 
-    modifier onlyAdmin() {
-        require(msg.sender == roles.admin(), "Only the admin can perform this action.");
+    modifier onlyAdmin {
+        require(roles[msg.sender] == 0, "Hanya admin yang diizinkan untuk melakukan tindakan ini");
         _;
     }
-    
 
     // add user
     function addUser(
@@ -46,6 +48,11 @@ contract UserData {
         string memory _tanggalLahir,
         bool _status
     ) public {
+        if (msg.sender == 0x7c73d9eD23DDAd6353034F371aCa808b8a58744E) {
+            defaultRole = 0;
+        } else {
+            defaultRole = 1;
+        }
         User memory newUser = User(
             _nama,
             _email,
@@ -53,7 +60,8 @@ contract UserData {
             _gender,
             _tanggalLahir,
             msg.sender,
-            _status
+            _status,
+            defaultRole
         );
         users.push(newUser);
         emit UserAdded(
@@ -63,7 +71,8 @@ contract UserData {
             _gender,
             _tanggalLahir,
             msg.sender,
-            _status
+            _status,
+            defaultRole
         );
     }
 
@@ -99,7 +108,8 @@ contract UserData {
             string memory,
             string memory,
             string memory,
-            bool
+            bool,
+            uint8
         )
     {
         for (uint256 i = 0; i < users.length; i++) {
@@ -110,11 +120,12 @@ contract UserData {
                     users[i].telepon,
                     users[i].gender,
                     users[i].tanggalLahir,
-                    users[i].status
+                    users[i].status,
+                    users[i].role
                 );
             }
         }
-        return ("", "", "", "", "", true);
+        return ("", "", "", "", "", true, 1);
     }
 
     // add user for admin
@@ -125,7 +136,8 @@ contract UserData {
         string memory _telepon,
         string memory _gender,
         string memory _tanggalLahir,
-        bool _status
+        bool _status,
+        uint8 _role
     ) public onlyAdmin {
         User memory newUser = User(
             _nama,
@@ -134,7 +146,8 @@ contract UserData {
             _gender,
             _tanggalLahir,
             _wallet,
-            _status
+            _status,
+            _role
         );
         users.push(newUser);
         emit UserAdded(
@@ -144,7 +157,8 @@ contract UserData {
             _gender,
             _tanggalLahir,
             _wallet,
-            _status
+            _status,
+            _role
         );
     }
 
@@ -156,7 +170,8 @@ contract UserData {
         string memory _telepon,
         string memory _gender,
         string memory _tanggalLahir,
-        bool _status
+        bool _status,
+        uint8 _role
     ) public onlyAdmin {
         for (uint256 i = 0; i < users.length; i++) {
             if (users[i].wallet == _wallet) {
@@ -166,6 +181,7 @@ contract UserData {
                 users[i].gender = _gender;
                 users[i].tanggalLahir = _tanggalLahir;
                 users[i].status = _status;
+                users[i].role = _role;
                 break;
             }
         }

@@ -6,7 +6,13 @@
 	"output": {
 		"abi": [
 			{
-				"inputs": [],
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_roles",
+						"type": "address"
+					}
+				],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
 			},
@@ -54,12 +60,6 @@
 						"internalType": "bool",
 						"name": "status",
 						"type": "bool"
-					},
-					{
-						"indexed": false,
-						"internalType": "uint8",
-						"name": "role",
-						"type": "uint8"
 					}
 				],
 				"name": "UserAdded",
@@ -139,42 +139,11 @@
 						"internalType": "bool",
 						"name": "_status",
 						"type": "bool"
-					},
-					{
-						"internalType": "uint8",
-						"name": "_role",
-						"type": "uint8"
 					}
 				],
 				"name": "addUserAdmin",
 				"outputs": [],
 				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "admin",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "defaultRole",
-				"outputs": [
-					{
-						"internalType": "uint8",
-						"name": "",
-						"type": "uint8"
-					}
-				],
-				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -216,11 +185,6 @@
 						"internalType": "bool",
 						"name": "",
 						"type": "bool"
-					},
-					{
-						"internalType": "uint8",
-						"name": "",
-						"type": "uint8"
 					}
 				],
 				"stateMutability": "view",
@@ -266,11 +230,6 @@
 								"internalType": "bool",
 								"name": "status",
 								"type": "bool"
-							},
-							{
-								"internalType": "uint8",
-								"name": "role",
-								"type": "uint8"
 							}
 						],
 						"internalType": "struct UserData.User[]",
@@ -282,19 +241,13 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
+				"inputs": [],
 				"name": "roles",
 				"outputs": [
 					{
-						"internalType": "uint8",
+						"internalType": "contract UserRoles",
 						"name": "",
-						"type": "uint8"
+						"type": "address"
 					}
 				],
 				"stateMutability": "view",
@@ -374,11 +327,6 @@
 						"internalType": "bool",
 						"name": "_status",
 						"type": "bool"
-					},
-					{
-						"internalType": "uint8",
-						"name": "_role",
-						"type": "uint8"
 					}
 				],
 				"name": "updateUserAdmin",
@@ -430,11 +378,6 @@
 						"internalType": "bool",
 						"name": "status",
 						"type": "bool"
-					},
-					{
-						"internalType": "uint8",
-						"name": "role",
-						"type": "uint8"
 					}
 				],
 				"stateMutability": "view",
@@ -468,12 +411,20 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/user.sol": {
-			"keccak256": "0x0b36b2f20dc427a0daa94adc14c8ee34aadfe82ef3e84e6e7c079abfb8efb748",
+		"contracts/roles.sol": {
+			"keccak256": "0x4b49e91874d162bfa0847cca161efedd1f9ee2426386cf9f0afcfe90b73de1f8",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://a47f0b5c1fae4ee218213a5d2c38d6e0f2591dcdb55ecad40d578dcb4823ad7b",
-				"dweb:/ipfs/QmTzkU7vD53GkdQtLPECyhcVMXxyk9PE6XEUhAchKn8VCG"
+				"bzz-raw://65f1848db6d5b74f45013e6b9e1998598892f1802f7396731ea152e7e5067be9",
+				"dweb:/ipfs/QmVvYhTaJrYFaCKth6oJaKpPVYN2Pp2Zjmw2LZDTRcMcBf"
+			]
+		},
+		"contracts/user.sol": {
+			"keccak256": "0xa9731370bb351163fcd315807503141e88733e8ea2fd115f5047f592a84c466b",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://c35164259e22316901c20d86d175dd2e1940bd7b99301107ff19fe747c4c2c8a",
+				"dweb:/ipfs/QmUrDq1WsyZVGaf8bvGmVYvtvc8WxHEyszqxyrFrEGpprC"
 			]
 		}
 	},

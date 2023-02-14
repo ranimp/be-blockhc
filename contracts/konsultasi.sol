@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
 
+import "./roles.sol";
+
 contract ConsultationResult {
-    enum Role {Pasien, Dokter, Admin}
+    UserRoles public roles;
 
     struct Data {
         string nama;
@@ -18,20 +20,19 @@ contract ConsultationResult {
     mapping(address => Data[]) public consultations;
     address[] public accountsWithConsultations;
     uint public consultationCount;
-    mapping(address => Role) public roles;
 
-    constructor() {
-        roles[msg.sender] = Role.Admin;
+    constructor(address _rolesContractAddress) {
+        roles = UserRoles(_rolesContractAddress);
     }
 
-    modifier onlyAdmin {
-        require(roles[msg.sender] == Role.Admin, "Hanya admin yang diizinkan untuk melakukan tindakan ini");
-    _;
+    modifier onlyPasien() {
+        require(roles.isPasien(msg.sender), "Hanya pasien yang diizinkan untuk mengakses");
+        _;
     }
 
-    modifier onlyAdminOrDokter {
-        require(roles[msg.sender] == Role.Admin || roles[msg.sender] == Role.Dokter, "Hanya admin dan dokter yang diizinkan untuk melakukan tindakan ini");
-    _;
+    modifier onlyAdminOrDokter() {
+        require(roles.isAdmin(msg.sender) || roles.isDokter(msg.sender), "Hanya admin atau dokter yang diizinkan untuk mengakses.");
+        _;
     }
 
     // tambah konsultasi untuk admin & dokter
@@ -65,12 +66,12 @@ contract ConsultationResult {
     }
 
     // get konsultasi untuk pasien
-    function getConsultationsPasien() public view returns (Data[] memory) {
+    function getConsultationsPasien() public view onlyPasien returns (Data[] memory) {
         return consultations[msg.sender];
     }
 
-    // get semua data konsultasi untuk admin
-    function getAllConsultations(uint offset) public view onlyAdmin returns (Data[] memory) {
+    // get semua data konsultasi untuk admin & dokter
+    function getAllConsultations(uint offset) public view onlyAdminOrDokter returns (Data[] memory) {
         uint maxConsultationsPerAccount = 10;
         Data[] memory allConsultations = new Data[](10 * maxConsultationsPerAccount);
         uint counter = 0;

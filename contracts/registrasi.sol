@@ -1,7 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
 
+import "./roles.sol";
+
 contract ConsultationRegist {
+    UserRoles public roles;
+
     struct Data {
         string nama;
         string telepon;
@@ -12,10 +16,24 @@ contract ConsultationRegist {
         string gender;
         address wallet;
     }
-
+    
     mapping(address => Data[]) public registrations;
     address[] public accountsWithRegistrations;
     uint public registrationCount;
+
+    constructor(address _rolesContractAddress) {
+        roles = UserRoles(_rolesContractAddress);
+    }
+
+    modifier onlyPasien() {
+        require(roles.isPasien(msg.sender), "Hanya pasien yang diizinkan untuk mengakses");
+        _;
+    }
+
+    modifier onlyAdminOrDokter() {
+        require(roles.isAdmin(msg.sender) || roles.isDokter(msg.sender), "Hanya admin atau dokter yang diizinkan untuk mengakses.");
+        _;
+    }
 
     // tambah pendaftaran untuk pasien
     function addRegistration(
@@ -33,12 +51,12 @@ contract ConsultationRegist {
     }
     
     // get bukti pendaftaran pasien
-    function getRegistrationEvidence() public view returns (Data[] memory) {
+    function getRegistrationEvidence() public view onlyPasien returns (Data[] memory) {
         return registrations[msg.sender];
     }
 
     // get data pendaftaran untuk admin & dokter
-    function getAllRegistrations(uint offset) public view returns (Data[] memory) {
+    function getAllRegistrations(uint offset) public view onlyAdminOrDokter returns (Data[] memory) {
         uint maxRegistrationsPerAccount = 10;
         Data[] memory allRegistrations = new Data[](10 * maxRegistrationsPerAccount);
         uint counter = 0;

@@ -1,12 +1,18 @@
 {
 	"compiler": {
-		"version": "0.8.7+commit.e28d00a7"
+		"version": "0.8.17+commit.8df45f5f"
 	},
 	"language": "Solidity",
 	"output": {
 		"abi": [
 			{
-				"inputs": [],
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_rolesContractAddress",
+						"type": "address"
+					}
+				],
 				"stateMutability": "nonpayable",
 				"type": "constructor"
 			},
@@ -266,19 +272,13 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					}
-				],
+				"inputs": [],
 				"name": "roles",
 				"outputs": [
 					{
-						"internalType": "enum ConsultationResult.Role",
+						"internalType": "contract UserRoles",
 						"name": "",
-						"type": "uint8"
+						"type": "address"
 					}
 				],
 				"stateMutability": "view",
@@ -366,11 +366,19 @@
 	},
 	"sources": {
 		"contracts/konsultasi.sol": {
-			"keccak256": "0xfd61d4feb9ae3872aa53449d34ee3d42c355f35de6d3713e1171642ffa754dd9",
+			"keccak256": "0x55baeaa670717b05764ada3d4e227e8d1afefae13ad654eb7a196ab78422ab71",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://0fc04bcb1c037b7a071065afb46b6aa86e9858b6581a2528ed3f7d3eb8aebd05",
-				"dweb:/ipfs/Qmavs2izpDP3HBzFS2DEXdRr5wsiP64JhkXYg4qxRKJGxY"
+				"bzz-raw://40192301f4bffcf34099e2c63520b762d4e9e516ec90b64e529042f3b77fd120",
+				"dweb:/ipfs/QmawPF3tjudXNEPyKrnSMx1gHxSiSDX2HB8hcZsBHsX6kS"
+			]
+		},
+		"contracts/roles.sol": {
+			"keccak256": "0xb0f1f17aedb4f49aa20b6292627014a83c94c59338c7fd05e8692208920a8bb8",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://7746ffbcb2d08a4ee6e0dc9ea9f4e3169ff94bae81f77b4f82c92f1815aa6470",
+				"dweb:/ipfs/QmXRwGTCDY3AKFHeH6YXxbAaStccJv8PooH2cbH6vvkRNz"
 			]
 		}
 	},
